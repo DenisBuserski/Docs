@@ -24,4 +24,4 @@ Select 1(For "nano"). Then add `0 * * * * /home/yourusername/obsidian-backup.sh 
 
 6. Using `crontab -l` you can check the cron you created. <br>
 
-7.
+Everything is set now. Enjoy!
