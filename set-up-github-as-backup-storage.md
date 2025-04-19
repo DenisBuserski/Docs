@@ -5,7 +5,7 @@
 
 2. Do `git init` and `git remote add origin [GitHub_repository]` in the folder, where your notes are. I also use the Main branch, so I did `git branch -M main`. <br>
 
-3. Create a script with the command `touch obsidian-backup.sh` - [obsidian-backup.sh](https://github.com/DenisBuserski/Docs/blob/main/obsidian-backup.sh). <br>
+3. Create a script with the command `touch obsidian-backup.sh` - [obsidian-backup.sh](https://github.com/DenisBuserski/Docs/blob/main/obsidian-backup.sh) <br>
 
 4. Make the script executable with the command - `chmod +x obsidian-backup.sh`. <br>
 
