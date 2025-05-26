@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class Game {
+public class MovingSquareGame {
     public static void main(String[] args) {
         new Game();
     }
@@ -17,7 +17,7 @@ public class Game {
     Action leftAction;
     Action rightAction;
 
-    Game() {
+    MovingSquareGame() {
         frame = new JFrame("KeyBinding Demo");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(420, 420);
