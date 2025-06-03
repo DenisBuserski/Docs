@@ -1,3 +1,5 @@
+For testing this tool I used this project - https://github.com/DenisBuserski/quarkus-grpc-demo
+
 Run:
 ```
 docker run --rm -p 8089:8089 -v $(pwd):/mnt/locust -w /mnt/locust locustio/locust -f locustfile.py --host=http://host.docker.internal:8082
