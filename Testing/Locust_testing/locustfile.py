@@ -1,6 +1,5 @@
 from locust import HttpUser, task, between
 import random
-import string
 
 class ProductTestUser(HttpUser):
     wait_time = between(1, 3)  # Simulate think time between requests
@@ -17,4 +16,3 @@ class ProductTestUser(HttpUser):
                 response.failure(f"Failed to fetch product {product_id}: {response.status_code}")
             else:
                 response.success()
-
