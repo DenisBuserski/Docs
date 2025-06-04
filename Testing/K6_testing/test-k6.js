@@ -1,35 +1,47 @@
 import http from 'k6/http';
 import grpc from 'k6/net/grpc';
-import { check } from 'k6';
+import {check, sleep} from 'k6';
 
 export let options = {
-  vus: 10,
-  duration: '30s',
+    vus: 10,
+    duration: '30s',
 };
 
-// Create and setup gRPC client once (init context)
-// const client = new grpc.Client();
-// client.load(['/proto'], 'hello.proto');
-// client.connect('http://host.docker.internal:8081', { plaintext: true });
+// Create and setup gRPC client once
+const client = new grpc.Client();
+client.load(['/proto'], 'hello.proto');
 
-
+// The default function runs once per Virtual User(VU) iteration.
+// This function is executed repeatedly by each VU during the test duration.
 export default function () {
-  // REST requests
+    client.connect('localhost:8081', { plaintext: true });
+    const randomId = Math.floor(Math.random() * 20) + 1;
 
-  let restRes = http.get('http://localhost:8082/hello');
-  check(restRes,
-          { 'REST status is 200': (r) => r.status === 200 });
+    // REST
+    let restHelloResponse = http.get('http://localhost:8082/hello');
+    check(restHelloResponse,
+        { 'REST status is 200': (r) => r.status === 200 });
+    console.log(JSON.stringify(restHelloResponse.message));
 
-  // Generate a random product ID between 1 and 1000
-  const randomId = Math.floor(Math.random() * 1000) + 1;
-  let restGetRes = http.get(`http://localhost:8082/get/${randomId}`);
-  check(restGetRes,
-          {'REST /get/{id} status is 200 or 404': (r) => r.status === 200 || r.status === 404,});
+    let getRestResponse = http.get(`http://localhost:8082/product/get/${randomId}`);
+    check(getRestResponse,
+        { 'REST /get/{id} status is 200 or 404': (response) => response.status === 200 || response.status === 404,});
+    console.log(JSON.stringify(getRestResponse.message));
 
-  // let grpcRes = client.invoke('com.demo.controller.grpc.HelloGrpcService/GetProductById', { id: '1' });
-  // check(grpcRes, { 'gRPC status is OK': (r) => r && r.status === grpc.StatusOK });
+    // gPRC
+    const data = {id: String(randomId)};
+    let getGrpcResponse = client.invoke('hello.HelloGrpc/GetProductById', data);
+    check(getGrpcResponse,
+        { 'gRPC status is OK': (r) => r && r.status === grpc.StatusOK});
+    console.log(JSON.stringify(getGrpcResponse.message));
+
+    client.close(); // Each iteration opens and closes a connection immediately
+    sleep(1);
 }
 
-export function teardown() {
-  client.close();
-}
+// The client connection is kept open for all iterations and only closed once after the entire test finishes.
+// Difference in CPU usage comes down a lot to when and how you close the client connection.
+// export function teardown() {
+//     client.close();
+// }
+
