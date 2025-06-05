@@ -15,7 +15,7 @@ docker run --rm --network host -v $(pwd):/mnt/locust -w /mnt/locust locustio/loc
 | `-f locustfile.py`             | The test script                                                                                                       |
 | `--host=http://localhost:8082` | Set the target host URL where Locust will load 8082 is where the application is running                               |
 
-
+<br>
 Number of users (peak concurrency)
 - Total number of simulated users(Virtual users) that will run the test
 - Will repeatedly execute tasks(`@task`-decorated functions)
