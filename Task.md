@@ -13,6 +13,8 @@ If `Pipe 1` and `Pipe 2` work together they will fill 11/30 for 1h
 1/5 + 1/6 = 11/30
 
 11/30 * X = 1
+
 X = 1 * 11/30
+
 X = 2.73
 ```
