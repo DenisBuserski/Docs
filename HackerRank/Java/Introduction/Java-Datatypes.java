@@ -1,7 +1,6 @@
 import java.util.*;
-import java.io.*;
 
-class Solution{
+public class Main {
     public static void main(String[] argh) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
