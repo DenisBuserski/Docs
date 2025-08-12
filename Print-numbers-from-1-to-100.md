@@ -1,6 +1,8 @@
 ### How to print the numbers from 1 to 100 without using any numbers.
-# https://www.youtube.com/watch?v=_BXSdPNFnX8&list=WL&index=87
 
+[Interview Question: Print from 1 to 100 without using any numbers in your code](https://www.youtube.com/watch?v=_BXSdPNFnX8&list=WL&index=87) <br>
+
+```
 int one = 'A' / 'A';
 String s1 = "..........";
 
@@ -11,3 +13,4 @@ for (int i = one; i <= (s1.length() * s1.length()); i++) {
 for (int i = one; i <= 'd'; i += one) {
     System.out.println(i);
 }
+```
