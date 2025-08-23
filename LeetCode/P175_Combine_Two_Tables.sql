@@ -1,3 +1,4 @@
+SELECT
 p.firstName,
 p.lastName,
 a.city,
